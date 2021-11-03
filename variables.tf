@@ -11,4 +11,9 @@ variable "events" {
   type = list(string)
   description = "type of events to monitor"
 }
+
+variable "subscriptions" {
+  type = list(string)
+  description = "subscriptions to monitor"
+}
  
