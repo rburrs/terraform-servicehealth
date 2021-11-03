@@ -15,11 +15,12 @@ resource "azurerm_monitor_action_group" "main" {
 }
 
 resource "azurerm_monitor_activity_log_alert" "main" {
-  for_each = var.subscriptions
+  // for_each = var.subscriptions
 
   name                = "securityalerts"
   resource_group_name = azurerm_resource_group.alertsgroup.name
-  scopes              = each.key
+  // scopes              = each.key
+  scopes              = var.subscriptions
   description         = "This alert will monitor a specific storage account updates."
 
   criteria {
