@@ -1,6 +1,8 @@
+data "azurerm_subscriptions" "available" {  
+}
 resource "azurerm_resource_group" "alertsgroup" {
   name     = "alerts-rg"
-  location = var.loc
+  location = var.rgloc
 }
 
 resource "azurerm_monitor_action_group" "main" {
@@ -20,8 +22,8 @@ resource "azurerm_monitor_activity_log_alert" "main" {
   name                = "securityalerts"
   resource_group_name = azurerm_resource_group.alertsgroup.name
   // scopes              = each.key
-  scopes              = var.subscriptions
-  description         = "This alert will monitor a specific storage account updates."
+  scopes      = toset([for s in data.azurerm_subscriptions.available.subscriptions.*.id : "/subscriptions/${s}"])
+  description = "This alert will monitor security related service health events."
 
   criteria {
     category = "ServiceHealth"
