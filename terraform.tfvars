@@ -1,22 +1,27 @@
+//region of resource group that contains the action group
 rgloc = "East US"
 
+//Use regions that are appropriate for your environment
 loc = [
   "East US",
   "Central US",
   "West US"
 ]
 
+//Use services that are appropriate for your environment
 services = [
   "Virtual Network",
   "Storage",
   "Virtual Machines"
 ]
-/*
+
+/* Use for testing on a subset of subscriptions.
 subscriptions = [
-  "c4991cab-5087-4f7e-b84f-0b71c321997f",
-  "063ee470-b444-4f3d-9819-cfda8b2ed411"
+  "<subscription GUID>",
+  "<subscription GUID>"
 ]
 */
+
 events = [
   "Security"
 ]

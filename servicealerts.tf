@@ -11,18 +11,16 @@ resource "azurerm_monitor_action_group" "main" {
   short_name          = "secgroup"
 
   email_receiver {
-    name          = "richardburrs"
-    email_address = "richardburrs@microsoft.com"
+    name          = "<name of individual or team>"
+    email_address = "<email address or distribution group>"
   }
 }
 
 resource "azurerm_monitor_activity_log_alert" "main" {
-  // for_each = var.subscriptions
-
   name                = "securityalerts"
   resource_group_name = azurerm_resource_group.alertsgroup.name
-  // scopes              = each.key
-  scopes      = toset([for s in data.azurerm_subscriptions.available.subscriptions.*.id : "/subscriptions/${s}"])
+  /*Scopes = var.subscriptions */
+  scopes      = toset(data.azurerm_subscriptions.available.subscriptions[*].id)
   description = "This alert will monitor security related service health events."
 
   criteria {
